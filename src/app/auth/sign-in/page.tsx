@@ -23,7 +23,7 @@ const UserContainer = styled.div`
 const SignInPage = () => {
     const [lastUser, setLastUser] = useState<User | null>(null);
 
-    const getUser = async () => {
+    const getMe = async () => {
         const res = await fetch('/api/user', { method: 'GET' });
         const { data } = await res.json();
 
@@ -31,7 +31,7 @@ const SignInPage = () => {
     }
 
     useEffect(() => {
-        getUser();
+        getMe();
     }, []);
 
     return (

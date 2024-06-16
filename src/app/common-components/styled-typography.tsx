@@ -5,7 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import React from "react";
 
 const MyTypography = styled(Typography)<{ theme: Theme, color: string }>`
-    color: ${({ theme, color }) => theme.palette?.[color].main}
+    color: ${({ theme, color }) => theme.palette?.[color].main};
 `;
 
 type Props = TypographyProps & { color?: string };
