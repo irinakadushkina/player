@@ -5,7 +5,6 @@ import StyledComponentsRegistry from './registry'
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { darkTheme } from "@/app/theme";
-import { MainLayout } from "./common-components/layout/main";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,11 +25,7 @@ export default function RootLayout({
               <CssBaseline />
               <AppRouterCacheProvider>
                   <StyledComponentsRegistry>
-                    
-                    <MainLayout>
                       {children}
-                    </MainLayout>
-                    
                     </StyledComponentsRegistry>
               </AppRouterCacheProvider>
           </ThemeProvider>

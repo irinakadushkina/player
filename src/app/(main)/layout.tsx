@@ -1,9 +1,9 @@
 'use client'
 
 import styled from "styled-components";
-import { NavBar } from "../navbar";
+import { NavBar } from "./components/navbar";
 import { Theme, useTheme } from "@mui/material";
-import { Header } from "../header";
+import { Header } from "./components/header";
 
 const Root = styled.div`
     display: flex;
@@ -31,10 +31,10 @@ const Container = styled.div`
 `;
 
 type Props = {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 };
 
-export const MainLayout = ({ children }: Props) => {
+const MainLayout = ({ children }: Props) => {
     const theme = useTheme();
 
     return (
@@ -49,3 +49,5 @@ export const MainLayout = ({ children }: Props) => {
         </Root>
     )
 };
+
+export default MainLayout
