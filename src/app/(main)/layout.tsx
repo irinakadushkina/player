@@ -1,52 +1,46 @@
-'use client'
-
-import styled from "styled-components";
 import { NavBar } from "./components/navbar";
-import { Theme, useTheme } from "@mui/material";
 import { Header } from "./components/header";
 
-const Root = styled.div`
-    display: flex;
-    flex-direction: column;
+const root: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
 
-    height: 100vh;
-    width: 100vw;
-`;
+    height: '100vh',
+    width: '100vw'
+};
 
-const ChildContainer = styled.main<{ theme: Theme}>`
-    padding: 16px 8px;
-    margin: 12px 12px 12px 0;
-    display: flex;
+const childContainer = {
+    padding: '16px 8px',
+    margin: '12px 12px 12px 0',
+    display: 'flex',
+    width: '80%',
+    minWidth: 'calc(100vw - 250px)',
 
-    width: 80%;
-    min-width: calc(100vw - 250px);
+    borderRadius: '12px',
+    background: "#121212",
+};
 
-    border-radius: 12px;
-    background: ${({theme}) => theme.palette.background.paper};
-`;
-
-const Container = styled.div`
-    display: flex;
-    height: calc(100vh - 50px);
-`;
+const container = {
+    display: 'flex',
+    height: 'calc(100vh - 50px)',
+};
 
 type Props = {
     children?: React.ReactNode;
 };
 
 const MainLayout = ({ children }: Props) => {
-    const theme = useTheme();
 
     return (
-        <Root>
+        <div style={root}>
             <Header />
-            <Container>
+            <div style={container}>
                 <NavBar />
-                <ChildContainer theme={theme}>
+                <main style={childContainer}>
                     {children}
-                </ChildContainer>
-            </Container>
-        </Root>
+                </main>
+            </div>
+        </div>
     )
 };
 

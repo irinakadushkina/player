@@ -1,27 +1,41 @@
-import { Theme, useTheme } from "@mui/material";
-import styled from "styled-components";
+type Props = {
+    mode?: "dark" | "light";
+}
 
-const StyledHeader = styled.header<{ theme: Theme }>`
-    display: flex;
-    align-items: center;
+const getStyles = ( mode: 'dark' | 'light' ): React.CSSProperties => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
 
-    height: 50px;
-    width: 100%;
+    height: '50px',
+    width: '100%',
 
-    padding: 4px 24px;
+    padding: "4px 24px",
 
-    background: ${({theme}) => theme.palette.mode === 'dark' ? theme.palette.common.black :  theme.palette.common.white };
-`;
+    background: `${mode === 'dark' ? 'black' :  'white'}`
+});
 
+const imageStyles: React.CSSProperties = {
+    width: '42px',
+    height: '42px',
 
-export const Header = () => {
-    const theme = useTheme();
+    borderRadius: '50%',
+    marginLeft: '12px',
+}
 
-    console.log('theme', theme)
+const getMe = async () => {
+    const res = await fetch(process.env.LOCAL_URL + '/api/user', { method: 'GET' });
+    const { data } = await res.json();
+    return data;
+};
+
+export const Header = async ({ mode = 'dark'}: Props) => {
+    const { first_name, last_name, avatar } = await getMe();
 
     return (
-        <StyledHeader theme={theme}>
-            Test
-        </StyledHeader>
+        <header style={getStyles(mode)}>
+            {first_name} {last_name}
+            <img style={imageStyles} src={avatar} />
+        </header>
     )
 }

@@ -1,4 +1,5 @@
 'use client'
+
 import styled from "styled-components";
 import { useTheme } from '@mui/material/styles';
 import { StyledTypography } from "@/app/common-components/styled-typography";
@@ -31,6 +32,7 @@ type Props = {
     children?: React.ReactNode;
 };
 
+// todo: переписать на серверный компонент
 const AuthLayout = ({ children }: Props) => {
     const theme = useTheme();
 
