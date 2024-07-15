@@ -1,15 +1,15 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiResponse } from 'next';
 import { USER } from "@/mock/user";
 import { User } from '@/app/types/user';
 
 type ResponseData<T> = {
     code: number;
     status: string;
-    data: T
+    data: T;
 }
 
 export async function GET(
-    req: NextApiRequest,
+    req: Request,
     res: NextApiResponse<ResponseData<User>>
 ) {
     // return NextResponse.json({
