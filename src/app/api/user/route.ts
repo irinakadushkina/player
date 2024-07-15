@@ -1,6 +1,6 @@
-import type { NextApiResponse } from 'next';
 import { USER } from "@/mock/user";
 import { User } from '@/app/types/user';
+import Server from 'next/server';
 
 type ResponseData<T> = {
     code: number;
@@ -9,8 +9,6 @@ type ResponseData<T> = {
 }
 
 export async function GET(
-    req: Request,
-    res: NextApiResponse<ResponseData<User>>
 ) {
     // return NextResponse.json({
     //     code: 200,
@@ -18,7 +16,7 @@ export async function GET(
     //     data: USER
     // })
 
-    res.json({
+    return Server.NextResponse.json({
         code: 200,
         status: 'success',
         data: USER
