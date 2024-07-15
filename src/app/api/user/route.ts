@@ -1,7 +1,5 @@
-import type { NextApiResponse } from 'next';
 import { USER } from "@/mock/user";
 import { User } from '@/app/types/user';
-import Server from 'next/server';
 
 type ResponseData<T> = {
     code: number;
