@@ -18,7 +18,7 @@ export async function GET(
     //     data: USER
     // })
 
-    res.status(200).json({
+    res.json({
         code: 200,
         status: 'success',
         data: USER
