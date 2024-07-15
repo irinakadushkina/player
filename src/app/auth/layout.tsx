@@ -3,7 +3,7 @@
 import styled from "styled-components";
 import { useTheme } from '@mui/material/styles';
 import { StyledTypography } from "@/app/common-components/styled-typography";
-import {Theme} from "@mui/system";
+import { Theme } from "@mui/system";
 
 const Root = styled.div<{ theme: Theme }>`
     width: 100%;

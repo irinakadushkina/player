@@ -55,7 +55,7 @@ const NavLink = styled(Link)<{ theme: Theme }>`
 export const NavBar = () => {
     const theme = useTheme();
 
-    console.log('theme', theme);
+    // console.log('theme', theme);
 
     return (
         <NavContainer>
