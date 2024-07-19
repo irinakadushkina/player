@@ -1,6 +1,4 @@
-'use client'
-
-import { useEffect, useState } from "react";
+import { getBaseUrl } from "@/app/helpers/get-base-url";
 
 type Props = {
     mode?: "dark" | "light";
@@ -28,24 +26,13 @@ const imageStyles: React.CSSProperties = {
 }
 
 const getMe = async () => {
-    const res = await fetch('/api/user', { method: 'GET' });
+    const res = await fetch(getBaseUrl() + '/api/user', { method: 'GET' });
     const { data } = await res.json();
     return data;
 };
 
-export const Header = ({ mode = 'dark'}: Props) => {
-    const [user, setUser] = useState({ first_name: null, last_name: null, avatar: ''});
-
-    const test = async () => {
-        const data = await getMe();
-        setUser(data)
-    };
-
-    const { first_name, last_name, avatar } = user;
-
-    useEffect(() => {
-        test();
-    }, [])
+export const Header = async ({ mode = 'dark'}: Props) => {
+    const { first_name, last_name, avatar } = await getMe();
 
     return (
         <header style={getStyles(mode)}>
