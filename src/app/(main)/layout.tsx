@@ -1,5 +1,5 @@
-import { NavBar } from "./components/navbar";
 import { Header } from "./components/header";
+import { NavBar } from "./components/navbar";
 
 const root: React.CSSProperties = {
     display: 'flex',

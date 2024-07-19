@@ -1,4 +1,6 @@
 import { getBaseUrl } from "@/app/helpers/get-base-url";
+import Link from "next/link";
+import styles from './index.module.css';
 
 type Props = {
     mode?: "dark" | "light";
@@ -17,14 +19,6 @@ const getStyles = ( mode: 'dark' | 'light' ): React.CSSProperties => ({
     background: `${mode === 'dark' ? 'black' :  'white'}`
 });
 
-const imageStyles: React.CSSProperties = {
-    width: '42px',
-    height: '42px',
-
-    borderRadius: '50%',
-    marginLeft: '12px',
-}
-
 const getMe = async () => {
     const res = await fetch(getBaseUrl() + '/api/user', { method: 'GET' });
     const { data } = await res.json();
@@ -36,8 +30,10 @@ export const Header = async ({ mode = 'dark'}: Props) => {
 
     return (
         <header style={getStyles(mode)}>
-            {first_name} {last_name}
-            <img style={imageStyles} src={avatar} />
+            <Link href='/profile' className={styles.link}>
+                {first_name} {last_name}
+                <img className={styles.avatar} src={avatar} />
+            </Link>
         </header>
     )
 }

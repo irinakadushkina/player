@@ -3,8 +3,6 @@ import { Button, Theme, useTheme } from "@mui/material";
 import Link from "next/link"
 import styled from "styled-components";
 
-// TODO: переделать в серверный компонент
-
 const ROUTES = [
     { 
         id: 'dashboard',
@@ -67,8 +65,6 @@ const NavLink = styled(Link)<{ theme: Theme }>`
 
 export const NavBar = () => {
     const theme = useTheme();
-
-    // console.log('theme', theme);
 
     return (
         <NavContainer>
