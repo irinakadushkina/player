@@ -1,5 +1,5 @@
 'use client'
-import { Theme, useTheme } from "@mui/material";
+import { Button, Theme, useTheme } from "@mui/material";
 import Link from "next/link"
 import styled from "styled-components";
 
@@ -30,11 +30,24 @@ const NavContainer = styled.nav`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    justify-content: space-between;
 
     max-width: 250px;
     width: 20%;
 
     padding: 16px 8px;
+`;
+
+const TopContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+`;
+
+const LogoutButton = styled(Button)`
+    width: 100%;
+    height: 48px;
 `;
 
 const NavLink = styled(Link)<{ theme: Theme }>`
@@ -59,9 +72,12 @@ export const NavBar = () => {
 
     return (
         <NavContainer>
-            {
-                ROUTES.map(({id, name, url})=> <NavLink key={id} href={url} theme={theme}>{name}</NavLink>)
-            }
+            <TopContainer>
+                {
+                    ROUTES.map(({id, name, url})=> <NavLink key={id} href={url} theme={theme}>{name}</NavLink>)
+                }
+            </TopContainer>
+            <LogoutButton>Log Out</LogoutButton>
         </NavContainer>
     )
 }
