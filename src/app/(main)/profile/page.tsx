@@ -1,5 +1,6 @@
 import { getBaseUrl } from "@/app/helpers/get-base-url";
-import styles from './page.module.css';
+import { MdModeEditOutline } from "react-icons/md";
+import styles from './page.module.scss';
 
 const getMe = async () => {
     const res = await fetch(getBaseUrl() + '/api/user', { method: 'GET' });
@@ -10,6 +11,8 @@ const getMe = async () => {
 const Profile = async () => {
     const { first_name, last_name, email, phone_number, avatar } = await getMe();
 
+    // todo: добавить модалки для редактирования
+
     return (
         <div className={styles.root}>
             <div className={styles.topLine}>
@@ -17,13 +20,10 @@ const Profile = async () => {
             </div>
             <div className={styles.info}>
                 <div className={styles.infoItem}>
-                    <span>Name: </span> <span className={styles.value}> {first_name} {last_name} </span>
+                    {first_name} {last_name} <MdModeEditOutline />
                 </div>
                 <div className={styles.infoItem}>
-                    <span>Phone: </span> <span className={styles.value}> {phone_number} </span>
-                </div>
-                <div className={styles.infoItem}>
-                    <span>E-Mail: </span> <span className={styles.value}> {email} </span>
+                    {phone_number} • {email}
                 </div>
             </div>
         </div>
