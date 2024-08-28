@@ -4,5 +4,5 @@ export const USER = {
     last_name: 'Müller',
     email: 'muller@gmail.com',
     phone_number: '(698) 709-2705 x633',
-    avatar: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1003.jpg'
+    avatar: 'https://i.pravatar.cc/500?img=12'
 }
