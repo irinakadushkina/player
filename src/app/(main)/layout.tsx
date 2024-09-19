@@ -17,7 +17,7 @@ const childContainer = {
     minWidth: 'calc(100vw - 250px)',
 
     borderRadius: '12px',
-    background: "#121212",
+    background: "#000000",
 };
 
 const container = {
