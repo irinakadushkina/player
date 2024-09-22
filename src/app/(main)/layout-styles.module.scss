@@ -1,0 +1,33 @@
+.root {
+    display: flex;
+    flex-direction: column;
+
+    height: 100vh;
+    width: 100vw;
+};
+
+.container {
+    display: flex;
+    height: calc(100vh - 50px);
+
+    @media screen and (max-width: 600px) {
+        & > nav {
+            display: none;
+        }
+    }
+};
+
+.main {
+    padding: 16px 8px;
+    margin: 12px 12px 12px 0;
+    display: flex;
+    width: 80%;
+    min-width: calc(100vw - 250px);
+
+    border-radius: 12px;
+    background: #000;
+
+    @media screen and (max-width: 600px) {
+        min-width: 100%;
+    }
+};

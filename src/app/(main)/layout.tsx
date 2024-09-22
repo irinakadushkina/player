@@ -1,29 +1,6 @@
 import { Header } from "./components/header";
 import { NavBar } from "./components/navbar";
-
-const root: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-
-    height: '100vh',
-    width: '100vw'
-};
-
-const childContainer = {
-    padding: '16px 8px',
-    margin: '12px 12px 12px 0',
-    display: 'flex',
-    width: '80%',
-    minWidth: 'calc(100vw - 250px)',
-
-    borderRadius: '12px',
-    background: "#000000",
-};
-
-const container = {
-    display: 'flex',
-    height: 'calc(100vh - 50px)',
-};
+import styles from './layout-styles.module.scss';
 
 type Props = {
     children?: React.ReactNode;
@@ -32,11 +9,11 @@ type Props = {
 const MainLayout = ({ children }: Props) => {
 
     return (
-        <div style={root}>
+        <div className={styles.root}>
             <Header />
-            <div style={container}>
+            <div className={styles.container}>
                 <NavBar />
-                <main style={childContainer}>
+                <main className={styles.main}>
                     {children}
                 </main>
             </div>
