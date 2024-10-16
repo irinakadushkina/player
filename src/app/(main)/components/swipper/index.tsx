@@ -20,8 +20,8 @@ export const Swipper: React.FC<SwipperProps> = ({ elements }) => {
         <div className={styles.container}>
             <ArrowBackIosIcon onClick={() => setCenteredElement(state => state - 1)} sx={{ cursor: 'pointer', visibility: centeredElement > 0 ? 'visible' : 'hidden' }} />
             <div className={styles.sideContainer}>
-                {shownElementLeft.length === 0 && <><Placeholder/><Placeholder/></>}
-                {shownElementLeft.length === 1 && <Placeholder/>}
+                {shownElementLeft.length === 0 && <><Placeholder /><Placeholder /></>}
+                {shownElementLeft.length === 1 && <Placeholder />}
                 {shownElementLeft}
             </div>
             <div className={styles.centered}>
@@ -29,8 +29,8 @@ export const Swipper: React.FC<SwipperProps> = ({ elements }) => {
             </div>
             <div className={styles.sideContainer}>
                 {shownElementsRight}
-                {shownElementsRight.length === 0 && <><Placeholder/><Placeholder/></>}
-                {shownElementsRight.length === 1 && <Placeholder/>}
+                {shownElementsRight.length === 0 && <><Placeholder /><Placeholder /></>}
+                {shownElementsRight.length === 1 && <Placeholder />}
             </div>
             { centeredElement < lastElementIndex && <ArrowForwardIosIcon onClick={() => setCenteredElement(state => state + 1)} sx={{ cursor: 'pointer', visibility: centeredElement < lastElementIndex ? 'visible' : 'hidden' }} /> }
         </div>
