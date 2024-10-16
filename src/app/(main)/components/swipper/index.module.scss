@@ -1,14 +1,25 @@
 .container { 
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     height: fit-content;
+    width: 100%;
 
-    .sideContainer { 
+    .sideContainer {
         align-items: center;
-        color: red;
         display: flex;
         gap: 8px;
         height: 80%;
+    }
+
+    .centered {
+        height: 200px;
+        width: 350px;
+
+        & > div {
+            height: 100%;
+            width: 100%;
+        }
     }
 }

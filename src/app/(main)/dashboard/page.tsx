@@ -3,7 +3,21 @@ import { Swipper } from '../components/swipper';
 import Card from './components/card/card';
 import styles from './page.module.scss';
 
-const test = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const test = [
+    <Card />,
+    <Card />,
+    <Card />,
+    <Card />,
+    <Card />,
+    <Card />,
+    <Card />,
+    <Card />,
+    <Card />,
+    <Card />,
+    <Card />,
+    <Card />,
+    <Card />,
+    <Card />,];
 
 const Dashboard = () => {
     return (
@@ -15,19 +29,7 @@ const Dashboard = () => {
                 <h1 className={styles.title}>ANTARES</h1>
             </section>
             Recomendations
-            <Swipper elements={test}>
-
-            </Swipper>
-            {/* <Scroller>
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />        
-                    <Card />
-            </Scroller> */}
+            <Swipper elements={test} />
         </div>
     )
 }
