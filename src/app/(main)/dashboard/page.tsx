@@ -1,4 +1,4 @@
-import { Scroller } from '../components/scroller';
+import { CardHoverEffector } from '../components/card-hover-effector';
 import Card from './components/card/card';
 import styles from './page.module.scss';
 
@@ -12,16 +12,15 @@ const Dashboard = () => {
                 <h1 className={styles.title}>ANTARES</h1>
             </section>
             Recomendations
-            <Scroller>
+            <CardHoverEffector>
                     <Card />
                     <Card />
                     <Card />
                     <Card />
                     <Card />
                     <Card />
-                    <Card />        
-                    <Card />
-            </Scroller>
+                    <Card /> 
+            </CardHoverEffector>
         </div>
     )
 }

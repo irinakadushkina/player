@@ -1,0 +1,18 @@
+.scrollContainer {
+    width: 100%;
+
+    display: flex;
+    gap: 16px;
+    padding: 8px 0;
+
+    & > div {
+        flex: 1;
+        border-radius: 1rem;
+        transition: all .5s;
+
+        &:hover {
+            cursor: pointer;
+            flex: 4; 
+        }
+    }
+}

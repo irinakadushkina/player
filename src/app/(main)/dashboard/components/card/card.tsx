@@ -7,8 +7,8 @@ const Card = () => {
     const theme = useTheme();
 
     return (
-        <Box sx={{ border: `1px solid ${theme.palette.primary.dark}`, borderRadius: '15px', height: '150px', width: '300px', flex: 'none', overflow: 'hidden' }}>
-            <Image src={test} height={150} alt='test' />
+        <Box sx={{ border: `1px solid ${theme.palette.primary.dark}`, borderRadius: '15px', flex: 'none', overflow: 'hidden' }}>
+            <Image src={test} height={300} alt='test' style={{ pointerEvents: 'none' }}/>
         </Box>
     );
 };
