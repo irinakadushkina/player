@@ -8,7 +8,7 @@ const Playlists = async () => {
     // todo: подумать над дизайном
     return (
         <div>
-            {playlists.map((item) => <PlaylistCard playlist={item} />)}
+            {playlists.map((item) => <PlaylistCard key={item.id} playlist={item} />)}
         </div>
     )
 }

@@ -21,7 +21,7 @@ const PlaylistPage: React.FC<PlaylistPageProps> = async ({ params }) => {
             <br />
             { 
             // todo: добавить компонент трека (общий)
-                playlist.tracks.map(track => <div>track id = {track}</div>)
+                playlist.tracks.map(track => <div key={track}>track id = {track}</div>)
             }
         </div>
     )
