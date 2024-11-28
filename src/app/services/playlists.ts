@@ -4,6 +4,7 @@ export const getPlaylists = async () => {
     const res = await fetch(getBaseUrl() + '/api/playlists', { method: 'GET' });
     try {
         const { data } = await res.json();
+        console.log('data', data);
     return data;
     } catch (e) {
         console.log('error =>', e)
