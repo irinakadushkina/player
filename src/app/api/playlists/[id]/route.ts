@@ -1,7 +1,6 @@
 import { playlists } from "@/mock/playlists";
 
-export async function GET(request: Request, { params } : { params: { id: string }}
-) {
+export async function GET(request: Request, { params } : { params: { id: string }}) {
     return Response.json({
         code: 200,
         status: 'success',
