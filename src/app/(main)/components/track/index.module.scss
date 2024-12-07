@@ -1,0 +1,58 @@
+
+.trackWrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 4px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: .3s;
+
+    .trackInfo {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        img {
+            border-radius: 8px;
+            width: 50px;
+            margin-right: 12px;
+            transition: .3s;
+        }
+
+        .iconWrapper {
+            transition: .3s;
+            opacity: 0;
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+        }
+
+        .titleBlock {
+            display: flex;
+            flex-direction: column;
+            font-weight: 600;
+            font-size: 14px;
+
+            .artists {
+                color: #ffffff96;
+            }
+        }
+    }
+
+    &:hover {
+        background: #006cc528;
+        img {
+            box-shadow: 0 0 0 1px #90caf9;
+        }
+
+        .iconWrapper {
+            opacity: 1;
+        }
+    }
+}

@@ -1,6 +1,7 @@
+import React from "react"
 import { getPlaylist } from "@/app/services/playlists";
 import { PlaylistType } from "@/app/types/playlists";
-import React from "react"
+import { Track } from "../../components/track";
 
 interface PlaylistPageProps {
     params: Promise<{ id: string }>
@@ -14,14 +15,15 @@ const PlaylistPage: React.FC<PlaylistPageProps> = async ({ params }) => {
     // todo: тоже нужен дизайн
 
     return (
-        <div>
+        <div style={{ width: "100%" }}>
             playlist #{id} -- {playlist.title}
             <br />
             <br />
             <br />
-            { 
-            // todo: добавить компонент трека (общий)
-                playlist.tracks.map(track => <div key={track}>track id = {track}</div>)
+            {
+                playlist.tracks.map(trackId => (
+                    <Track key={trackId} trackId={trackId} />
+                ))
             }
         </div>
     )

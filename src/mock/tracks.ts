@@ -1,7 +1,8 @@
 //@ts-ignore
 import RoterStern from './tracks/Roter-Stern.mp3';
+import { TracksType } from '@/app/types/tracks';
 
-export const tracks = [
+export const tracks: TracksType  = [
     {
         id: '000',
         src: RoterStern,
