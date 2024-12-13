@@ -1,12 +1,22 @@
+'use client';
+import React, { useState } from 'react';
 import { findTrack } from "@/app/helpers/track-helpers";
 import styles from './index.module.scss';
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaRegHeart  } from "react-icons/fa";
 
-export const Track = ({ trackId }: { trackId: string }) => {
-    const { id, title, artists, cover } = findTrack(trackId);
+interface TrackProps {
+    trackId: string
+}
+
+export const Track: React.FC<TrackProps> = ({ trackId }) => {
+    const { title, artists, cover } = findTrack(trackId);
+    const [isHovered, setIsHovered] = useState(false);
+
+    const onMouseOver = () => setIsHovered(true);
+    const onMouseLeave = () => setIsHovered(false);
 
     return (
-        <div className={styles.trackWrapper}>
+        <div className={styles.trackWrapper} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
             <div className={styles.trackInfo}>
                 <img src={cover} />
                 <div className={styles.iconWrapper}>
@@ -17,6 +27,13 @@ export const Track = ({ trackId }: { trackId: string }) => {
                     <span className={styles.artists}>{artists.join(', ')}</span>
                 </div>
             </div>
+            {
+                isHovered && (
+                    <div className={styles.actionsBlock}>
+                        <FaRegHeart />
+                    </div>
+                )
+            }
         </div>
     )
 };
