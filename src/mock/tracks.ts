@@ -1,6 +1,7 @@
 import RoterStern from './tracks/Roter-Stern.mp3';
 import Raketen from './tracks/Raketen.mp3';
 import Marsch from './tracks/Marsch.mp3';
+import TheRedBaron from './tracks/The-Red-Baron.mp3';
 import { TracksType } from '@/app/types/tracks';
 
 export const tracks: TracksType  = [
@@ -24,5 +25,12 @@ export const tracks: TracksType  = [
         title: 'Marsch',
         cover: 'https://avatars.yandex.net/get-music-content/13449652/7cd59d65.a.33308997-1/200x200',
         artists: [ '000' ],
+    },
+    {
+        id: '003',
+        src: TheRedBaron,
+        title: 'The Red Baron',
+        cover: 'https://avatars.yandex.net/get-music-content/99892/d255c320.a.7284080-1/200x200',
+        artists: [ '001' ],
     },
 ];
