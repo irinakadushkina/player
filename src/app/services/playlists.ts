@@ -1,4 +1,5 @@
 import { getBaseUrl } from "../helpers/get-base-url";
+import { PlaylistType } from "../types/playlists";
 
 export const getPlaylists = async () => {
     const res = await fetch(getBaseUrl() + '/api/playlists', { method: 'GET' });
@@ -10,7 +11,7 @@ export const getPlaylists = async () => {
     }
 };
 
-export const getPlaylist = async (id: string) => {
+export const getPlaylist = async (id: string): Promise<PlaylistType | undefined> => {
     const res = await fetch(getBaseUrl() + `/api/playlists/${id}`, { method: 'GET' });
     try {
         const { data } = await res.json();

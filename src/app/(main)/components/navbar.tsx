@@ -73,7 +73,6 @@ export const NavBar = () => {
                     ROUTES.map(({id, name, url})=> <NavLink key={id} href={url} theme={theme}>{name}</NavLink>)
                 }
             </TopContainer>
-            <LogoutButton>Log Out</LogoutButton>
         </NavContainer>
     )
 }

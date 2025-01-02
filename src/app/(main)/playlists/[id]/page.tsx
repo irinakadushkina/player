@@ -9,19 +9,19 @@ interface PlaylistPageProps {
 
 const PlaylistPage: React.FC<PlaylistPageProps> = async ({ params }) => {
     const id = (await params).id;
-    const playlist: PlaylistType = await getPlaylist(id);
+    const { title, tracks } = await getPlaylist(id) || {};
 
 
     // todo: тоже нужен дизайн
 
     return (
         <div style={{ width: "100%" }}>
-            playlist #{id} -- {playlist.title}
+            {title}
             <br />
             <br />
             <br />
             {
-                playlist.tracks.map(trackId => (
+                tracks?.map(trackId => (
                     <Track key={trackId} trackId={trackId} />
                 ))
             }

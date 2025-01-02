@@ -1,3 +1,4 @@
+import { BottomPlayer } from "./components/bottom-player";
 import { Header } from "./components/header";
 import { NavBar } from "./components/navbar";
 import styles from './layout-styles.module.scss';
@@ -17,6 +18,7 @@ const MainLayout = ({ children }: Props) => {
                     {children}
                 </main>
             </div>
+            <BottomPlayer />
         </div>
     )
 };
