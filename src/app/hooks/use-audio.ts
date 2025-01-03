@@ -1,16 +1,16 @@
 import { useUnit } from 'effector-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { $currentTrackId, updateCurrentId, fetchTrackByIdFx, setPlaying, $playing } from '../store/queue';
+import { $currentTrackId, updateCurrentId, fetchTrackByIdFx, setPlaying, $playing, $queue } from '../store/queue';
 import { TrackType } from '../types/tracks';
 // import { $currentTrackId, $playing, $queue, fetchTrackByIdFx, setPlaying, updateCurrentId } from '../store/queue';
 
 export const useAudio = () => {
   const currentId = useUnit($currentTrackId);
-//   const list = useUnit($queue);
+  const list = useUnit($queue);
   const isPlaying = useUnit($playing);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [volume, setVolume] = useState(10);
-  const [mute, setMute] = useState(false);
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [volume, setVolume] = useState<number>(10);
+  const [mute, setMute] = useState<boolean>(false);
   const [track, setTrack] = useState<TrackType>();
   const trackLoading = useUnit(fetchTrackByIdFx.pending);
 
@@ -20,30 +20,30 @@ export const useAudio = () => {
   const isReady = useRef(false);
   const { duration } = audio.current || {};
 
-//   //Предыдущий трек
-//   const handlePrevTrack = useCallback(() => {
-//     setCurrentTime(0);
-//     audio.current?.pause();
-//     const trackIndex = list.findIndex(item => item === currentId);
+  //Предыдущий трек
+  const handlePrevTrack = useCallback(() => {
+    setCurrentTime(0);
+    audio.current?.pause();
+    const trackIndex = list.findIndex(item => item === currentId);
 
-//     if (trackIndex - 1 < 0) {
-//         updateCurrentId(list[list.length - 1]);
-//     } else {
-//         updateCurrentId(list[trackIndex - 1]);
-//     }
-//   }, [list, currentId]);
+    if (trackIndex - 1 < 0) {
+        updateCurrentId(list[list.length - 1]);
+    } else {
+        updateCurrentId(list[trackIndex - 1]);
+    }
+  }, [list, currentId]);
 
-//   //Следующий трек
-//   const handleNextTrack = useCallback(() => {
-//     setCurrentTime(0);
-//     audio.current?.pause();
-//     const trackIndex = list.findIndex(item => item === currentId);
-//     if (trackIndex < list.length - 1) {
-//         updateCurrentId(list[trackIndex + 1]);
-//     } else {
-//         updateCurrentId(list[0]);
-//     }
-//   }, [currentId, list]);
+  //Следующий трек
+  const handleNextTrack = useCallback(() => {
+    setCurrentTime(0);
+    audio.current?.pause();
+    const trackIndex = list.findIndex(item => item === currentId);
+    if (trackIndex < list.length - 1) {
+        updateCurrentId(list[trackIndex + 1]);
+    } else {
+        updateCurrentId(list[0]);
+    }
+  }, [currentId, list]);
 
   //Начало сдвига трека
   const handleScrub = useCallback((value: number) => {
@@ -130,15 +130,18 @@ export const useAudio = () => {
     setPlaying(!audio.current?.paused)
   }, [audio.current?.paused]);
 
-//   Эффект с привязкой событий на изменение времени и окончание трека
-//   useEffect(() => {
-//     audio.current.ontimeupdate = (e) => setCurrentTime(e.target.currentTime);
-//     audio.current.onended = handleNextTrack;
-//   }, [audio.current, handleNextTrack]);
+  // Эффект с привязкой событий на изменение времени и окончание трека
+  useEffect(() => {
+    if(audio.current) {
+      // @ts-ignore
+      audio.current.ontimeupdate = (e) => setCurrentTime(e.target?.currentTime || 0);
+      audio.current.onended = handleNextTrack;
+    }
+  }, [audio.current, handleNextTrack]);
 
   const data = useMemo(() => ({
-    // handleNextTrack,
-    // handlePrevTrack,
+    handleNextTrack,
+    handlePrevTrack,
     handleScrub,
     handleScrubEnd,
     handlePlayButtonClick,
@@ -147,8 +150,8 @@ export const useAudio = () => {
     trackLoading,
     track: { id, src, cover, title, artists, duration, volume, mute, progress: currentTime, isPlaying },
   }), [
-    // handleNextTrack,
-    // handlePrevTrack,
+    handleNextTrack,
+    handlePrevTrack,
     handleScrub,
     handleScrubEnd,
     handlePlayButtonClick,

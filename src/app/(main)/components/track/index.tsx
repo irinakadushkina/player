@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import { findTrack } from "@/app/helpers/track-helpers";
 import styles from './index.module.scss';
 import { FaPlay, FaRegHeart, FaPause } from "react-icons/fa";
-import { updateCurrentId, $currentTrackId, $playing, setPlaying } from '@/app/store/queue';
+import { updateCurrentId, $currentTrackId, $playing, setPlaying, updateQueue } from '@/app/store/queue';
 import { useUnit } from 'effector-react';
 import cn from 'classnames';
+import { usePathname } from 'next/navigation';
+import { playlists } from '@/mock/playlists';
 
 interface TrackProps {
     trackId: string
@@ -17,13 +19,19 @@ export const Track: React.FC<TrackProps> = ({ trackId }) => {
     const currentTrackId = useUnit($currentTrackId);
     const isPlaying = useUnit($playing);
     const isCurrentTrack = currentTrackId === id;
+    const pathname = usePathname();
+    const [ _, type, listId] = pathname.split('/');
 
     const onMouseOver = () => setIsHovered(true);
     const onMouseLeave = () => setIsHovered(false);
 
     const handleClick = () => {
         if (isCurrentTrack) setPlaying(!isPlaying); 
-        else updateCurrentId(id);
+        else {
+            const nextList = playlists.find(item => item.id === listId);
+            updateQueue(nextList?.tracks || []);
+            updateCurrentId(id);
+        }
     }
 
     return (
