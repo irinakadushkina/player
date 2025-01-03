@@ -2,6 +2,7 @@ import { getPlaylists } from '@/app/services/playlists';
 import { PlaylistsType } from '@/app/types/playlists';
 import { PlaylistCard } from './components/playlist-card';
 import { Suspense } from 'react';
+import { Grid } from '@mui/material';
 
 const Playlists = async () => {
     const playlists: PlaylistsType = await getPlaylists();
@@ -9,9 +10,12 @@ const Playlists = async () => {
     // todo: подумать над дизайном
     return (
         <Suspense fallback={<>Loading...</>}>
-            <div>
-                {playlists?.map((item) => <PlaylistCard key={item.id} playlist={item} />)}
-            </div>
+            <Grid container spacing={2}>
+                {playlists?.map((item) => <Grid key={item.id}>
+                        <PlaylistCard key={item.id} playlist={item} />
+                    </Grid>
+                )}
+            </Grid>
         </Suspense>
     )
 }

@@ -16,9 +16,9 @@ const MainLayout = ({ children }: Props) => {
                 <NavBar />
                 <main className={styles.main}>
                     {children}
+                    <BottomPlayer />
                 </main>
             </div>
-            <BottomPlayer />
         </div>
     )
 };

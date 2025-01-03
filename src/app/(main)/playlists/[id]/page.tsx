@@ -1,6 +1,5 @@
 import React from "react"
 import { getPlaylist } from "@/app/services/playlists";
-import { PlaylistType } from "@/app/types/playlists";
 import { Track } from "../../components/track";
 
 interface PlaylistPageProps {

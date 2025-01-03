@@ -4,6 +4,7 @@ import { useUnit } from 'effector-react';
 import { $currentTrackId } from '@/app/store/queue';
 import { Box } from '@mui/material';
 import { useAudio } from '@/app/hooks/use-audio';
+import styles from './index.module.scss';
 
 export const BottomPlayer = () => {
     const { track, handlePlayButtonClick } = useAudio();
@@ -12,8 +13,8 @@ export const BottomPlayer = () => {
     if (!currentTrackId) return null;
  
     return (
-        <Box sx={{ position: 'fixed', bottom: 0, padding: '12px 24px', bgcolor: 'primary.main', width: '100%' }} onClick={handlePlayButtonClick} >
-            <img src={track.cover}/>
+        <Box className={styles.box} onClick={handlePlayButtonClick} >
+            <img className={styles.trackCover} src={track.cover}/>
             {track.title}
         </Box>
     )
