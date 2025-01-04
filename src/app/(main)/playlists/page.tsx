@@ -10,7 +10,7 @@ const Playlists = async () => {
     // todo: подумать над дизайном
     return (
         <Suspense fallback={<>Loading...</>}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} margin={0}>
                 {playlists?.map((item) => <Grid key={item.id}>
                         <PlaylistCard key={item.id} playlist={item} />
                     </Grid>

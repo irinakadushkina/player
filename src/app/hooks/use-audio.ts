@@ -89,7 +89,7 @@ export const useAudio = () => {
   }, [getTrackById]);
 
   //Эффект на остановку при размонтировании
-  useEffect(() => {
+  useEffect(() => { 
     return () => {
       if (!audio.current) return;
       setPlaying(false);

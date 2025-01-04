@@ -8,6 +8,7 @@ import { useUnit } from 'effector-react';
 import cn from 'classnames';
 import { usePathname } from 'next/navigation';
 import { playlists } from '@/mock/playlists';
+import { Typography } from '@mui/material';
 
 interface TrackProps {
     trackId: string
@@ -40,12 +41,12 @@ export const Track: React.FC<TrackProps> = ({ trackId }) => {
                 <img src={cover} />
                 <div className={styles.iconWrapper}>
                     {
-                        isCurrentTrack && isPlaying ? <FaPause /> : <FaPlay id="playIcon"/>
+                        isCurrentTrack && isPlaying ? <FaPause /> : <FaPlay />
                     }
                 </div>
                 <div className={styles.titleBlock}> 
-                    <span>{title}</span>
-                    <span className={styles.artists}>{artists.join(', ')}</span>
+                    <Typography sx={{ fontSize: '14px', fontWeight: 700 }}>{title}</Typography>
+                    <Typography sx={{ opacity: .5, fontSize: '14px' }}>{artists.join(', ')}</Typography>
                 </div>
             </div>
             {

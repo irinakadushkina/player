@@ -1,5 +1,6 @@
 import { tracks } from "@/mock/tracks";
 import { createEvent, createStore, createEffect } from "effector";
+import { findTrack } from "../helpers/track-helpers";
 
 export const updateCurrentId = createEvent<string>();
 export const setPlaying = createEvent<boolean>();
@@ -13,6 +14,4 @@ $currentTrackId.on(updateCurrentId, (_, newId) => newId);
 $playing.on(setPlaying, (_, playing) => playing);
 $queue.on(updateQueue, (_, list) => list);
 
-export const fetchTrackByIdFx = createEffect((id: string) => {
-    return tracks.find(item => item.id === id);
-  });
+export const fetchTrackByIdFx = createEffect((id: string) => findTrack(id));
