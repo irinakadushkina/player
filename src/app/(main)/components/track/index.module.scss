@@ -46,14 +46,16 @@
         }
     }
 
-    &:hover {
-        background: #006cc528;
-        img {
-            box-shadow: 0 0 0 1px #90caf9;
-        }
-
-        .iconWrapper {
-            opacity: 1;
+    @media screen and (min-width: 700px) {
+        &:hover {
+            background: #006cc528;
+            img {
+                box-shadow: 0 0 0 1px #90caf9;
+            }
+    
+            .iconWrapper {
+                opacity: 1;
+            }
         }
     }
     

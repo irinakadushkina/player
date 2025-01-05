@@ -8,13 +8,14 @@ import { useUnit } from 'effector-react';
 import cn from 'classnames';
 import { usePathname } from 'next/navigation';
 import { playlists } from '@/mock/playlists';
-import { Typography } from '@mui/material';
+import { Typography, useMediaQuery } from '@mui/material';
 
 interface TrackProps {
     trackId: string
 }
 
 export const Track: React.FC<TrackProps> = ({ trackId }) => {
+    const mobile = useMediaQuery('(max-width: 700px)');
     const { title, artists, cover, id } = findTrack(trackId);
     const [isHovered, setIsHovered] = useState(false);
     const currentTrackId = useUnit($currentTrackId);
@@ -23,8 +24,14 @@ export const Track: React.FC<TrackProps> = ({ trackId }) => {
     const pathname = usePathname();
     const [ _, type, listId] = pathname.split('/');
 
-    const onMouseOver = () => setIsHovered(true);
-    const onMouseLeave = () => setIsHovered(false);
+    const onMouseOver = () => {
+        if (mobile) return;
+        setIsHovered(true);
+    }
+    const onMouseLeave = () => {
+        if (mobile) return;
+        setIsHovered(false);
+    }
 
     const handleClick = () => {
         if (isCurrentTrack) setPlaying(!isPlaying); 
