@@ -14,7 +14,7 @@ export const BottomPlayer = () => {
     const currentTrackId = useUnit($currentTrackId);
 
     return (
-        <Box className={styles.box} justifyContent={currentTrackId ? 'space-between' : 'center'}>
+        <Box className={styles.box} justifyContent={currentTrackId && !mobile ? 'space-between' : 'center'}>
             {currentTrackId && <Box display="flex" alignItems="center" width={mobile ? '75%' : '33%'}>
                 <img className={styles.trackCover} src={cover} />
                 <Box display='flex' flexDirection='column'>
@@ -23,8 +23,8 @@ export const BottomPlayer = () => {
                 </Box>
             </Box>
             }
-            <Box display="flex" width="33%" justifyContent={mobile ? 'flex-end' : 'center'}>
-                {!mobile && (
+            <Box display="flex" width="33%" justifyContent={currentTrackId && mobile ? 'flex-end' : 'center'}>
+                {currentTrackId && !mobile && (
                     <Button sx={{ padding: '12px' }} onClick={handlePrevTrack}>
                         <FaAngleDoubleLeft size={24} />
                     </Button>
@@ -33,7 +33,7 @@ export const BottomPlayer = () => {
                 <Button sx={{ padding: '12px' }} onClick={handlePlayButtonClick}>
                     {isPlaying ? <FaPause size={24} /> : <FaPlay size={24} />}
                 </Button>
-                {!mobile && (
+                {currentTrackId && !mobile && (
                     <Button sx={{ padding: '12px' }} onClick={handleNextTrack}>
                         <FaAngleDoubleRight size={24} />
                     </Button>
