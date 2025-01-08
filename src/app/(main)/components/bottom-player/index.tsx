@@ -25,7 +25,7 @@ export const BottomPlayer = () => {
             </Box>
             }
             <Box display="flex" width="33%" flexDirection='column'>
-                <Box display="flex" justifyContent={currentTrackId && mobile ? 'flex-end' : 'center'} marginBottom='6px'>
+                <Box display="flex" justifyContent={currentTrackId && mobile ? 'flex-end' : 'center'} marginBottom={currentTrackId && !mobile ? '6px' : 0}>
                     {currentTrackId && !mobile && (
                         <Button sx={{ padding: '8px' }} onClick={handlePrevTrack}>
                             <FaAngleDoubleLeft size={20} />
@@ -42,7 +42,7 @@ export const BottomPlayer = () => {
                     )   
                     }
                 </Box>
-                <TrackLine duration={duration || 0} progress={progress} onScrub={handleScrub} onScrubEnd={handleScrubEnd} />
+                { currentTrackId && !mobile && <TrackLine duration={duration || 0} progress={progress} onScrub={handleScrub} onScrubEnd={handleScrubEnd} />}
             </Box>
             {
                 currentTrackId && !mobile && (
