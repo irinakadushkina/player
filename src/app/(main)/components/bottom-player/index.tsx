@@ -7,10 +7,11 @@ import { useAudio } from '@/app/hooks/use-audio';
 import styles from './index.module.scss';
 import { FaPlay, FaPause, FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import { FaRepeat } from "react-icons/fa6";
+import { TrackLine } from '../track-line';
 
 export const BottomPlayer = () => {
     const mobile = useMediaQuery('(max-width: 700px)');
-    const { track: { cover, title, artists, isPlaying }, handlePlayButtonClick, handlePrevTrack, handleNextTrack } = useAudio();
+    const { track: { cover, title, artists, isPlaying, duration, progress }, handlePlayButtonClick, handlePrevTrack, handleNextTrack, handleScrub, handleScrubEnd } = useAudio();
     const currentTrackId = useUnit($currentTrackId);
 
     return (
@@ -23,22 +24,25 @@ export const BottomPlayer = () => {
                 </Box>
             </Box>
             }
-            <Box display="flex" width="33%" justifyContent={currentTrackId && mobile ? 'flex-end' : 'center'}>
-                {currentTrackId && !mobile && (
-                    <Button sx={{ padding: '12px' }} onClick={handlePrevTrack}>
-                        <FaAngleDoubleLeft size={24} />
+            <Box display="flex" width="33%" flexDirection='column'>
+                <Box display="flex" justifyContent={currentTrackId && mobile ? 'flex-end' : 'center'} marginBottom='6px'>
+                    {currentTrackId && !mobile && (
+                        <Button sx={{ padding: '8px' }} onClick={handlePrevTrack}>
+                            <FaAngleDoubleLeft size={20} />
+                        </Button>
+                    )
+                    }
+                    <Button sx={{ padding: '8px' }} onClick={handlePlayButtonClick}>
+                        {isPlaying ? <FaPause size={20} /> : <FaPlay size={20} />}
                     </Button>
-                )
-                }
-                <Button sx={{ padding: '12px' }} onClick={handlePlayButtonClick}>
-                    {isPlaying ? <FaPause size={24} /> : <FaPlay size={24} />}
-                </Button>
-                {currentTrackId && !mobile && (
-                    <Button sx={{ padding: '12px' }} onClick={handleNextTrack}>
-                        <FaAngleDoubleRight size={24} />
-                    </Button>
-                )
-                }
+                    {currentTrackId && !mobile && (
+                        <Button sx={{ padding: '8px' }} onClick={handleNextTrack}>
+                            <FaAngleDoubleRight size={20} />
+                        </Button>
+                    )   
+                    }
+                </Box>
+                <TrackLine duration={duration || 0} progress={progress} onScrub={handleScrub} onScrubEnd={handleScrubEnd} />
             </Box>
             {
                 currentTrackId && !mobile && (

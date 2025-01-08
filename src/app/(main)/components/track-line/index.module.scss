@@ -1,0 +1,35 @@
+.line {
+  -webkit-appearance: none;
+  appearance: none; 
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  border-radius: 8px;
+
+
+  /* Track: webkit browsers */
+    &::-webkit-slider-runnable-track {
+    height: 4px;
+    background: #ffffff33;
+    border-radius: 8px;
+  }
+  
+  /* Track: Mozilla Firefox */
+  &::-moz-range-track {
+    height: 4px;
+    background: #ffffff33;
+    border-radius: 8px;
+  }
+  
+  /* Thumb: webkit */
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none; 
+    height: 4px;
+    width: 4px;
+    background-color: #90caf9;
+    border-radius: 50%;
+    box-shadow: -402px 0 0 400px #90caf9;
+  }
+}
