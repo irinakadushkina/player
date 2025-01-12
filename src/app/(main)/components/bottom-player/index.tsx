@@ -2,16 +2,16 @@
 import React from 'react';
 import { useUnit } from 'effector-react';
 import { $currentTrackId } from '@/app/store/queue';
-import { Box, Button, Typography, useMediaQuery } from '@mui/material';
+import { Box, Button, Slider, Typography, useMediaQuery } from '@mui/material';
 import { useAudio } from '@/app/hooks/use-audio';
 import styles from './index.module.scss';
 import { FaPlay, FaPause, FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
-import { FaRepeat } from "react-icons/fa6";
+import { FaRepeat, FaVolumeHigh, FaVolumeLow, FaVolumeXmark } from "react-icons/fa6";
 import { TrackLine } from '../track-line';
 
 export const BottomPlayer = () => {
     const mobile = useMediaQuery('(max-width: 700px)');
-    const { track: { cover, title, artists, isPlaying, duration, progress }, handlePlayButtonClick, handlePrevTrack, handleNextTrack, handleScrub, handleScrubEnd } = useAudio();
+    const { track: { cover, title, artists, isPlaying, duration, progress, volume, mute }, handlePlayButtonClick, handlePrevTrack, handleNextTrack, handleScrub, handleScrubEnd, handleChangeVolume, handleMute } = useAudio();
     const currentTrackId = useUnit($currentTrackId);
 
     return (
@@ -39,15 +39,21 @@ export const BottomPlayer = () => {
                         <Button sx={{ padding: '8px' }} onClick={handleNextTrack}>
                             <FaAngleDoubleRight size={20} />
                         </Button>
-                    )   
+                    )
                     }
                 </Box>
-                { currentTrackId && !mobile && <TrackLine duration={duration || 0} progress={progress} onScrub={handleScrub} onScrubEnd={handleScrubEnd} />}
+                {currentTrackId && !mobile && <TrackLine duration={duration || 0} progress={progress} onScrub={handleScrub} onScrubEnd={handleScrubEnd} />}
             </Box>
             {
                 currentTrackId && !mobile && (
                     <Box display="flex" alignItems="center" justifyContent="flex-end" paddingRight="24px" width="33%" gap="12px">
                         <FaRepeat size={16} />
+                        <Box display="flex" alignItems="center" gap="16px">
+                            {volume >= 50 && !mute && <FaVolumeHigh onClick={handleMute} />}
+                            {volume < 50 && volume > 0 && !mute && <FaVolumeLow onClick={handleMute} />}
+                            {(volume === 0 || mute) && <FaVolumeXmark onClick={handleMute} />}
+                            <Slider aria-label="volume" value={volume} onChange={handleChangeVolume} sx={{ width: '100px' }} />
+                        </Box>
                     </Box>
                 )
             }

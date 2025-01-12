@@ -65,18 +65,22 @@ export const useAudio = () => {
   }
 
   //Изменение громкости звука
-  const handleChangeVolume = useCallback((volume: number) => {
+  const handleChangeVolume = useCallback((_: Event, value: number | number[]) => {
+    const volume = Array.isArray(value) ? value[0] : value;
     if (audio.current) {
       audio.current.volume = volume / 100;
       setVolume(volume);
     }
   }, [audio.current]);
 
-  const handleMute = useCallback((mute: boolean) => {
-    if (audio.current) {
-      audio.current.muted = mute;
-      setMute(mute);
-    }
+  const handleMute = useCallback(() => {
+      setMute(state => {
+        if (audio.current) {
+          audio.current.muted = !state;
+          return !state;
+        }
+        else return state;
+      });
   }, [audio.current]);
 
   const getTrackById = useCallback(async () => {
@@ -146,7 +150,7 @@ export const useAudio = () => {
     handleScrubEnd,
     handlePlayButtonClick,
     handleChangeVolume,
-    setMute: handleMute,
+    handleMute,
     trackLoading,
     track: { id, src, cover, title, artists, duration, volume, mute, progress: currentTime, isPlaying },
   }), [
