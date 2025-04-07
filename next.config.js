@@ -29,7 +29,7 @@ module.exports = {
     return [
       {
         source: '/',
-        destination: '/playlists',
+        destination: '/dashboard',
         permanent: true,
       },
     ]
