@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { $currentTrackId, updateCurrentId, fetchTrackByIdFx, setPlaying, $playing, $queue } from '../store/queue';
+import { $currentTrackId, updateCurrentId, fetchTrackByIdFx, setPlaying, $playing, $queue, addTrackToHistory } from '../store/queue';
 import { TrackType } from '../types/tracks';
 // import { $currentTrackId, $playing, $queue, fetchTrackByIdFx, setPlaying, updateCurrentId } from '../store/queue';
 
@@ -139,7 +139,10 @@ export const useAudio = () => {
     if(audio.current) {
       // @ts-ignore
       audio.current.ontimeupdate = (e) => setCurrentTime(e.target?.currentTime || 0);
-      audio.current.onended = handleNextTrack;
+      audio.current.onended = () => {
+        if (id) addTrackToHistory(id);
+        handleNextTrack();
+      };
     }
   }, [audio.current, handleNextTrack]);
 

@@ -12,10 +12,11 @@ export const playlists = [
         tracks: [ '003' ],
     }
 ];
-
-
-export const history = [
-    '002',
-    '003',
-    '000',
-]
+export const history = {
+    id: '000_history',
+    tracks: [
+        '002',
+        '003',
+        '000',
+    ] 
+}

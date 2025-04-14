@@ -17,7 +17,7 @@ const Dashboard = () => {
             <Typography sx={{ padding: "4px 16px"}}>Latest tracks</Typography>
             <div className={cn(styles.block, styles.list)}>
                 {   
-                    history?.map(trackId => (
+                    history.tracks?.map(trackId => (
                         <Track key={trackId} trackId={trackId} />
                     ))
                 }

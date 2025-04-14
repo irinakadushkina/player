@@ -7,7 +7,7 @@ import { updateCurrentId, $currentTrackId, $playing, setPlaying, updateQueue } f
 import { useUnit } from 'effector-react';
 import cn from 'classnames';
 import { usePathname } from 'next/navigation';
-import { playlists } from '@/mock/playlists';
+import { playlists, history as mockHistory } from '@/mock/playlists';
 import { Typography, useMediaQuery } from '@mui/material';
 
 interface TrackProps {
@@ -36,7 +36,7 @@ export const Track: React.FC<TrackProps> = ({ trackId }) => {
     const handleClick = () => {
         if (isCurrentTrack) setPlaying(!isPlaying); 
         else {
-            const nextList = playlists.find(item => item.id === listId);
+            const nextList = type === "dashboard" ? mockHistory : playlists.find(item => item.id === listId);
             updateQueue(nextList?.tracks || []);
             updateCurrentId(id);
         }
