@@ -18,14 +18,14 @@ const Dashboard = () => {
             <div className={cn(styles.block, styles.list)}>
                 {   
                     history.tracks?.map(trackId => (
-                        <Track key={trackId} trackId={trackId} />
+                        <Track key={trackId} trackId={trackId} playlistId='000_history' /> // сделать потом запросом
                     ))
                 }
             </div>
             <Typography sx={{ padding: "4px 16px"}}>Latest playlists</Typography>
             <div className={styles.block}>
                 {playlists?.map((item) =>
-                    <PlaylistCard key={item.id} playlist={item} />
+                    <PlaylistCard key={item.id} playlist={item} /> // тут тоже
                 )}
             </div>
         </div>

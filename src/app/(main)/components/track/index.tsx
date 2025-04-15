@@ -11,10 +11,11 @@ import { playlists, history as mockHistory } from '@/mock/playlists';
 import { Typography, useMediaQuery } from '@mui/material';
 
 interface TrackProps {
-    trackId: string
+    trackId: string;
+    playlistId?: string
 }
 
-export const Track: React.FC<TrackProps> = ({ trackId }) => {
+export const Track: React.FC<TrackProps> = ({ trackId, playlistId }) => {
     const mobile = useMediaQuery('(max-width: 700px)');
     const { title, artists, cover, id } = findTrack(trackId);
     const [isHovered, setIsHovered] = useState(false);
@@ -23,6 +24,7 @@ export const Track: React.FC<TrackProps> = ({ trackId }) => {
     const isCurrentTrack = currentTrackId === id;
     const pathname = usePathname();
     const [ _, type, listId] = pathname.split('/');
+    const currentPlaylistId = playlistId || listId;
 
     const onMouseOver = () => {
         if (mobile) return;
@@ -36,7 +38,7 @@ export const Track: React.FC<TrackProps> = ({ trackId }) => {
     const handleClick = () => {
         if (isCurrentTrack) setPlaying(!isPlaying); 
         else {
-            const nextList = type === "dashboard" ? mockHistory : playlists.find(item => item.id === listId);
+            const nextList = [...playlists, mockHistory].find(item => item.id === currentPlaylistId);
             updateQueue(nextList?.tracks || []);
             updateCurrentId(id);
         }
