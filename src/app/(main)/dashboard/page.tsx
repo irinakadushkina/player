@@ -14,7 +14,7 @@ const Dashboard = () => {
                 </video>
                 <h1 className={styles.title}>ANTARES</h1>
             </section>
-            <Typography sx={{ padding: "4px 16px"}}>Latest tracks</Typography>
+            <Typography sx={{ padding: "4px 16px" }}>Latest tracks</Typography>
             <div className={cn(styles.block, styles.list)}>
                 {   
                     history.tracks?.map(trackId => (
@@ -22,7 +22,7 @@ const Dashboard = () => {
                     ))
                 }
             </div>
-            <Typography sx={{ padding: "4px 16px"}}>Latest playlists</Typography>
+            <Typography sx={{ padding: "4px 16px" }}>Latest playlists</Typography>
             <div className={styles.block}>
                 {playlists?.map((item) =>
                     <PlaylistCard key={item.id} playlist={item} /> // тут тоже
