@@ -7,7 +7,9 @@ type Props = {
     children?: React.ReactNode;
 };
 
-const MainLayout = ({ children }: Props) =>(
+const MainLayout = ({ children }: Props) => {
+
+    return (
         <div className={styles.root}>
             <Header />
             <div className={styles.container}>
@@ -18,6 +20,7 @@ const MainLayout = ({ children }: Props) =>(
                 </main>
             </div>
         </div>
-    );
+    )
+};
 
 export default MainLayout
