@@ -1,8 +1,9 @@
+import { CircleLoading } from '../common-components/circle-loading';
+import styles from './layout-styles.module.scss';
+
 const MainLoading = ( ) => (
-    <div>
-        Loading...
-        <br/>
-        A pretty loading component is in development
+    <div className={styles.loading}>
+        <CircleLoading />
     </div>
 );
 
