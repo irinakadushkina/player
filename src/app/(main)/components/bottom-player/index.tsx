@@ -1,18 +1,29 @@
 'use client'
 import React from 'react';
 import { useUnit } from 'effector-react';
-import { $currentTrackId } from '@/app/store/queue';
+import { $currentTrackId, $playingType, changePlayingType } from '@/app/store/queue';
 import { Box, Button, Slider, Typography, useMediaQuery } from '@mui/material';
 import { useAudio } from '@/app/hooks/use-audio';
 import styles from './index.module.scss';
 import { FaPlay, FaPause, FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
-import { FaRepeat, FaVolumeHigh, FaVolumeLow, FaVolumeXmark } from "react-icons/fa6";
+import { FaVolumeHigh, FaVolumeLow, FaVolumeXmark } from "react-icons/fa6";
+import { TbRepeat, TbRepeatOff, TbRepeatOnce } from "react-icons/tb";
 import { TrackLine } from '../track-line';
 
 export const BottomPlayer = () => {
     const mobile = useMediaQuery('(max-width: 700px)');
     const { track: { cover, title, artists, isPlaying, duration, progress, volume, mute }, handlePlayButtonClick, handlePrevTrack, handleNextTrack, handleScrub, handleScrubEnd, handleChangeVolume, handleMute } = useAudio();
     const currentTrackId = useUnit($currentTrackId);
+    const playingType = useUnit($playingType);
+
+    const changePlayingTypeHandler = () => {
+        switch (playingType) {
+            case 'repeat': return changePlayingType('repeat_one');
+            case 'repeat_one': return changePlayingType('line');
+            case 'line': return changePlayingType('repeat')
+        }
+    }
+
 
     return (
         <Box className={styles.box} justifyContent={currentTrackId && !mobile ? 'space-between' : 'center'}>
@@ -47,7 +58,13 @@ export const BottomPlayer = () => {
             {
                 currentTrackId && !mobile && (
                     <Box display="flex" alignItems="center" justifyContent="flex-end" paddingRight="24px" width="33%" gap="12px">
-                        <FaRepeat size={16} />
+                        <Box onClick={changePlayingTypeHandler} display="flex" alignItems="center">
+                            {
+                                (playingType === 'repeat' && <TbRepeat size={20} />) ||
+                                (playingType === 'repeat_one' && <TbRepeatOnce size={20} />) ||
+                                (playingType === 'line' && <TbRepeatOff size={20} />)
+                            }
+                        </Box>
                         <Box display="flex" alignItems="center" gap="16px">
                             {volume >= 50 && !mute && <FaVolumeHigh onClick={handleMute} />}
                             {volume < 50 && volume > 0 && !mute && <FaVolumeLow onClick={handleMute} />}

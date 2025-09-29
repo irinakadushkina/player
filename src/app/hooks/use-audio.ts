@@ -1,18 +1,19 @@
 import { useUnit } from 'effector-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { $currentTrackId, updateCurrentId, fetchTrackByIdFx, setPlaying, $playing, $queue, addTrackToHistory } from '../store/queue';
+import { $currentTrackId, updateCurrentId, fetchTrackByIdFx, setPlaying, $playing, $queue, addTrackToHistory, $playingType, changePlayingType } from '../store/queue';
 import { TrackType } from '../types/tracks';
-// import { $currentTrackId, $playing, $queue, fetchTrackByIdFx, setPlaying, updateCurrentId } from '../store/queue';
 
 export const useAudio = () => {
   const currentId = useUnit($currentTrackId);
   const list = useUnit($queue);
   const isPlaying = useUnit($playing);
+  const playingType = useUnit($playingType);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [volume, setVolume] = useState<number>(10);
   const [mute, setMute] = useState<boolean>(false);
   const [track, setTrack] = useState<TrackType>();
   const trackLoading = useUnit(fetchTrackByIdFx.pending);
+  const trackIndex = list.findIndex(item => item === currentId);
 
   const { src, cover, title, artists, id } = track || {};
 
@@ -24,26 +25,26 @@ export const useAudio = () => {
   const handlePrevTrack = useCallback(() => {
     setCurrentTime(0);
     audio.current?.pause();
-    const trackIndex = list.findIndex(item => item === currentId);
 
     if (trackIndex - 1 < 0) {
-        updateCurrentId(list[list.length - 1]);
+     if (playingType === 'repeat') updateCurrentId(list[list.length - 1]);
     } else {
-        updateCurrentId(list[trackIndex - 1]);
+      updateCurrentId(list[trackIndex - 1]);
     }
-  }, [list, currentId]);
+  }, [list, currentId, trackIndex, playingType]);
 
   //Следующий трек
   const handleNextTrack = useCallback(() => {
     setCurrentTime(0);
     audio.current?.pause();
-    const trackIndex = list.findIndex(item => item === currentId);
+
+    console.log(trackIndex, list.length, playingType)
     if (trackIndex < list.length - 1) {
-        updateCurrentId(list[trackIndex + 1]);
-    } else {
-        updateCurrentId(list[0]);
+      updateCurrentId(list[trackIndex + 1]);
+    } else if (playingType === 'repeat') {
+      updateCurrentId(list[0]);
     }
-  }, [currentId, list]);
+  }, [currentId, list, trackIndex, playingType]);
 
   //Начало сдвига трека
   const handleScrub = useCallback((value: number) => {
@@ -74,13 +75,13 @@ export const useAudio = () => {
   }, [audio.current]);
 
   const handleMute = useCallback(() => {
-      setMute(state => {
-        if (audio.current) {
-          audio.current.muted = !state;
-          return !state;
-        }
-        else return state;
-      });
+    setMute(state => {
+      if (audio.current) {
+        audio.current.muted = !state;
+        return !state;
+      }
+      else return state;
+    });
   }, [audio.current]);
 
   const getTrackById = useCallback(async () => {
@@ -93,7 +94,7 @@ export const useAudio = () => {
   }, [getTrackById]);
 
   //Эффект на остановку при размонтировании
-  useEffect(() => { 
+  useEffect(() => {
     return () => {
       if (!audio.current) return;
       setPlaying(false);
@@ -136,15 +137,20 @@ export const useAudio = () => {
 
   // Эффект с привязкой событий на изменение времени и окончание трека
   useEffect(() => {
-    if(audio.current) {
+    if (audio.current) {
       // @ts-ignore
       audio.current.ontimeupdate = (e) => setCurrentTime(e.target?.currentTime || 0);
       audio.current.onended = () => {
         if (id) addTrackToHistory(id);
-        handleNextTrack();
-      };
+        if (playingType !== 'repeat_one') handleNextTrack();
+        else {
+          setCurrentTime(0);
+          audio.current?.play();
+          updateCurrentId(list[trackIndex]);
+        };
+      }
     }
-  }, [audio.current, handleNextTrack]);
+  }, [audio.current, handleNextTrack, playingType, trackIndex]);
 
   const data = useMemo(() => ({
     handleNextTrack,
