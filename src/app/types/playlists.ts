@@ -1,7 +1,7 @@
 export interface PlaylistType {
         id: string;
         title: string;
-        cover: string;
+        cover?: string | null;
         tracks: string[];
         liked: number;
         listened: number;

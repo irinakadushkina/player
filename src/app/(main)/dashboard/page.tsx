@@ -23,7 +23,7 @@ const Dashboard = () => {
                 }
             </div>
             <Typography sx={{ padding: "4px 16px" }}>Latest playlists</Typography>
-            <div className={styles.block}>
+            <div className={styles.grid}>
                 {playlists?.map((item) =>
                     <PlaylistCard key={item.id} playlist={item} /> // тут тоже
                 )}

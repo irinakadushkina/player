@@ -10,8 +10,8 @@ export const playlists = [
     {
         id: '001',
         title: 'test playlist 2',
-        cover: 'https://avatars.yandex.net/get-music-content/99892/d255c320.a.7284080-1/200x200',
-        tracks: [ '003' ],
+        cover: null,
+        tracks: [ '004', '005' ],
         listened: 6000,
         liked: 5432,
     }
