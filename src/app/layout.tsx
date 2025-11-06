@@ -27,14 +27,14 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
       </head>
       <body className={inter.className}>
-          <ThemeProvider theme={darkTheme}>
-              <CssBaseline />
-              <AppRouterCacheProvider>
-                  <StyledComponentsRegistry>
-                      {children}
-                    </StyledComponentsRegistry>
-              </AppRouterCacheProvider>
-          </ThemeProvider>
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <AppRouterCacheProvider>
+            <StyledComponentsRegistry>
+              {children}
+            </StyledComponentsRegistry>
+          </AppRouterCacheProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
