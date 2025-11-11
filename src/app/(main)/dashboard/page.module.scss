@@ -6,21 +6,16 @@
     .videoTitle {
         width: 100%;
         height: 200px;
-        position: relative;
 
         display: flex;
         align-items: center;
         justify-content: center;
 
-        video {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            object-fit: cover;
-            filter: brightness(200%);
-        }
+        background: linear-gradient(-45deg, #000000, #222222, #5200b1, #0088a0, #000000);
+        background-size: 600% 600%;
+        animation: gradient 20s ease infinite;
+        animation-delay: 5s;
+        background-position: 100% 100%;
 
         @media screen and (max-width: 900px) {
             height: 100px;
@@ -77,4 +72,22 @@
     @media screen and (max-width: 550px) {
             grid-template-columns: repeat(2, 1fr);
         }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 100% 100%;
+    }
+
+    5% {
+        background-position: 100% 50%;
+    }
+
+    50% {
+        background-position: 0% 20%;
+    }
+
+    100% {
+      background-position: 100% 100%;
+    }
 }
