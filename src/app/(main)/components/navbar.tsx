@@ -17,6 +17,12 @@ const ROUTES = [
         url: '/playlists'
     },
     { 
+        id: 'radio',
+        name: 'Radio (special for Nikita)',
+        icon: null,
+        url: '/radio'
+    },
+        { 
         id: 'podcasts',
         name: 'Podcasts',
         icon: null,

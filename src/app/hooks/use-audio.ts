@@ -1,6 +1,6 @@
 import { useUnit } from 'effector-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { $currentTrackId, updateCurrentId, fetchTrackByIdFx, setPlaying, $playing, $queue, addTrackToHistory, $playingType, changePlayingType } from '../store/queue';
+import { $currentTrackId, updateCurrentId, fetchTrackByIdFx, setPlaying, $playing, $queue, addTrackToHistory, $playingType } from '../store/queue';
 import { TrackType } from '../types/tracks';
 
 export const useAudio = () => {

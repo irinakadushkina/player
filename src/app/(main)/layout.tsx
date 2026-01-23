@@ -1,6 +1,8 @@
 import { BottomPlayer } from "./components/bottom-player";
+import { BottomRadioPlayer } from "./components/bottom-radio-player";
 import { Header } from "./components/header";
 import { NavBar } from "./components/navbar";
+import { Player } from "./components/player";
 import styles from './layout-styles.module.scss';
 
 type Props = {
@@ -8,6 +10,7 @@ type Props = {
 };
 
 const MainLayout = ({ children }: Props) => {
+
 
     return (
         <div className={styles.root}>
@@ -18,7 +21,7 @@ const MainLayout = ({ children }: Props) => {
                     <div>
                         {children}
                     </div>
-                    <BottomPlayer />
+                    <Player />
                 </main>
             </div>
         </div>

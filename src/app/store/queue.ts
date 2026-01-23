@@ -4,7 +4,7 @@ import { history as mockedHistory} from "@/mock/playlists";
 
 type PlayingType = 'repeat' | 'repeat_one' | 'line';
 
-export const updateCurrentId = createEvent<string>();
+export const updateCurrentId = createEvent<string|undefined>();
 export const setPlaying = createEvent<boolean>();
 export const updateQueue = createEvent<string[]>();
 export const addTrackToQueue = createEvent<string>();

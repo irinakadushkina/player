@@ -10,7 +10,7 @@ import { FaVolumeHigh, FaVolumeLow, FaVolumeXmark } from "react-icons/fa6";
 import { TbRepeat, TbRepeatOff, TbRepeatOnce } from "react-icons/tb";
 import { TrackLine } from '../track-line';
 
-export const BottomPlayer = () => {
+export const BottomPlayer = ({ hide }:{ hide: boolean}) => {
     const mobile = useMediaQuery('(max-width: 700px)');
     const { track: { cover, title, artists, isPlaying, duration, progress, volume, mute }, handlePlayButtonClick, handlePrevTrack, handleNextTrack, handleScrub, handleScrubEnd, handleChangeVolume, handleMute } = useAudio();
     const currentTrackId = useUnit($currentTrackId);
@@ -24,6 +24,7 @@ export const BottomPlayer = () => {
         }
     }
 
+    if(hide) return null;
 
     return (
         <Box className={styles.box} justifyContent={currentTrackId && !mobile ? 'space-between' : 'center'}>

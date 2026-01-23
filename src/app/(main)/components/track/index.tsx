@@ -9,6 +9,7 @@ import cn from 'classnames';
 import { usePathname } from 'next/navigation';
 import { playlists, history as mockHistory } from '@/mock/playlists';
 import { Typography, useMediaQuery } from '@mui/material';
+import { setPlayingRadio, updateCurrentRadio } from '@/app/store/radio';
 
 interface TrackProps {
     trackId: string;
@@ -36,6 +37,8 @@ export const Track: React.FC<TrackProps> = ({ trackId, playlistId }) => {
     }
 
     const handleClick = () => {
+        updateCurrentRadio(undefined);
+        setPlayingRadio(false);
         if (isCurrentTrack) setPlaying(!isPlaying); 
         else {
             const nextList = [...playlists, mockHistory].find(item => item.id === currentPlaylistId);
