@@ -3,7 +3,7 @@
     border-radius: 8px;
     margin-right: 12px;
 
-     @media screen and (max-width: 700px) {
+    @media screen and (max-width: 700px) {
         width: 52px;
         margin-right: 8px;
     }
@@ -16,7 +16,7 @@
 
     height: 80px;
     padding: 8px;
-    background-color: #ffffff21;
+    background-color: #2b2b2b;
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -25,5 +25,6 @@
         padding: 4px;
         height: 60px;
         width: calc(100% - 16px);
+        top: calc(100% - 50px);
     }
 }

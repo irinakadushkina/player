@@ -1,7 +1,6 @@
-import { BottomPlayer } from "./components/bottom-player";
-import { BottomRadioPlayer } from "./components/bottom-radio-player";
 import { Header } from "./components/header";
 import { NavBar } from "./components/navbar";
+import { NavBarMobile } from "./components/navbar-mobile";
 import { Player } from "./components/player";
 import styles from './layout-styles.module.scss';
 
@@ -17,6 +16,7 @@ const MainLayout = ({ children }: Props) => {
             <Header />
             <div className={styles.container}>
                 <NavBar />
+                <NavBarMobile />
                 <main className={styles.main}>
                     <div>
                         {children}
