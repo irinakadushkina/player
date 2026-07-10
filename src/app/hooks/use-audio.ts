@@ -1,5 +1,6 @@
 import { useUnit } from 'effector-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
 import { $currentTrackId, updateCurrentId, fetchTrackByIdFx, setPlaying, $playing, $queue, addTrackToHistory, $playingType } from '../store/queue';
 import { TrackType } from '../types/tracks';
 
@@ -147,7 +148,7 @@ export const useAudio = () => {
           setCurrentTime(0);
           audio.current?.play();
           updateCurrentId(list[trackIndex]);
-        };
+        }
       }
     }
   }, [audio.current, handleNextTrack, playingType, trackIndex]);

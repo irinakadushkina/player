@@ -1,6 +1,8 @@
 import { createEvent, createStore, createEffect } from "effector";
-import { findTrack } from "../helpers/track-helpers";
+
 import { history as mockedHistory} from "@/mock/playlists";
+
+import { findTrack } from "../helpers/track-helpers";
 
 type PlayingType = 'repeat' | 'repeat_one' | 'line';
 

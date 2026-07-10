@@ -1,10 +1,11 @@
 'use client'
 
-import styled from "styled-components";
 import { Avatar, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { User } from "@/app/types/user";
+import styled from "styled-components";
+
 import { StyledTypography } from "@/app/common-components/styled-typography";
+import { User } from "@/app/types/user";
 
 const Container = styled.div`
     display: flex;

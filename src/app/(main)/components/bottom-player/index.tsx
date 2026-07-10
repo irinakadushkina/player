@@ -1,14 +1,17 @@
 'use client'
-import React from 'react';
-import { useUnit } from 'effector-react';
-import { $currentTrackId, $playingType, changePlayingType } from '@/app/store/queue';
 import { Box, Button, Slider, Typography, useMediaQuery } from '@mui/material';
-import { useAudio } from '@/app/hooks/use-audio';
-import styles from './index.module.scss';
+import { useUnit } from 'effector-react';
+import React from 'react';
 import { FaPlay, FaPause, FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 import { FaVolumeHigh, FaVolumeLow, FaVolumeXmark } from "react-icons/fa6";
 import { TbRepeat, TbRepeatOff, TbRepeatOnce } from "react-icons/tb";
+
+import { useAudio } from '@/app/hooks/use-audio';
+import { $currentTrackId, $playingType, changePlayingType } from '@/app/store/queue';
+
 import { TrackLine } from '../track-line';
+
+import styles from './index.module.scss';
 
 export const BottomPlayer = ({ hide }:{ hide: boolean}) => {
     const mobile = useMediaQuery('(max-width: 700px)');

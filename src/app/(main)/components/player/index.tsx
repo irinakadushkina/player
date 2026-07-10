@@ -1,9 +1,11 @@
 'use client'
+import { useUnit } from 'effector-react';
+
 import { $currentTrackId, $playing } from "@/app/store/queue";
 import { $currentRadio, $playingRadio } from "@/app/store/radio";
-import { BottomRadioPlayer } from "../bottom-radio-player";
+
 import { BottomPlayer } from "../bottom-player";
-import { useUnit } from 'effector-react';
+import { BottomRadioPlayer } from "../bottom-radio-player";
 
 export const Player = () => {
     const currentRadio = useUnit($currentRadio);

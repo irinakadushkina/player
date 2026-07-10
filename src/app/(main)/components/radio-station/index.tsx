@@ -1,13 +1,15 @@
 'use client';
-import React, { useState } from 'react';
-import styles from './index.module.scss';
-import { FaPlay, FaRegHeart, FaPause } from "react-icons/fa";
-import { useUnit } from 'effector-react';
-import cn from 'classnames';
 import { Typography, useMediaQuery } from '@mui/material';
+import cn from 'classnames';
+import { useUnit } from 'effector-react';
+import React, { useState } from 'react';
+import { FaPlay, FaRegHeart, FaPause } from "react-icons/fa";
+
 import { findRadioStation } from '@/app/helpers/radio-helper';
-import { $currentRadio, $playingRadio, setPlayingRadio, updateCurrentRadio } from '@/app/store/radio';
 import { setPlaying, updateCurrentId } from '@/app/store/queue';
+import { $currentRadio, $playingRadio, setPlayingRadio, updateCurrentRadio } from '@/app/store/radio';
+
+import styles from './index.module.scss';
 
 interface TrackProps {
     station: string;

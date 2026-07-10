@@ -6,4 +6,4 @@ export async function GET() {
         status: 'success',
         data: playlists // todo: надо перенести все в бд и сделать по-человечески
     })
-};
+}

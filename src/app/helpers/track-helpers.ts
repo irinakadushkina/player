@@ -1,5 +1,6 @@
 import { artists } from "@/mock/artists";
 import { tracks } from "@/mock/tracks";
+
 import { TrackType } from "../types/tracks";
 
 export const findTrack = (id: string): TrackType => {

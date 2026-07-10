@@ -1,5 +1,7 @@
-import { getBaseUrl } from "@/app/helpers/get-base-url";
 import Link from "next/link";
+
+import { getBaseUrl } from "@/app/helpers/get-base-url";
+
 import styles from './index.module.css';
 
 type Props = {

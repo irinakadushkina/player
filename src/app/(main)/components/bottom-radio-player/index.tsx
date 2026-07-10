@@ -1,11 +1,13 @@
 'use client'
-import React from 'react';
 import { Box, Button, Slider, Typography, useMediaQuery } from '@mui/material';
-import styles from './index.module.scss';
+import React from 'react';
 import { FaPlay, FaPause } from "react-icons/fa";
 import { FaVolumeHigh, FaVolumeLow, FaVolumeXmark } from "react-icons/fa6";
+
 import { useRadio } from '@/app/hooks/use-radio';
 import { setPlayingRadio } from '@/app/store/radio';
+
+import styles from './index.module.scss';
 
 export const BottomRadioPlayer = ({ hide }: { hide?: boolean }) => {
     const mobile = useMediaQuery('(max-width: 700px)');

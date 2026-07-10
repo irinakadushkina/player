@@ -1,9 +1,11 @@
 'use client'
 
-import styled from "styled-components";
 import { useTheme } from '@mui/material/styles';
-import { StyledTypography } from "@/app/common-components/styled-typography";
 import { Theme } from "@mui/system";
+import styled from "styled-components";
+
+import { StyledTypography } from "@/app/common-components/styled-typography";
+
 
 const Root = styled.div<{ theme: Theme }>`
     width: 100%;

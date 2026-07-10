@@ -1,15 +1,17 @@
 'use client';
-import React, { useState } from 'react';
-import { findTrack } from "@/app/helpers/track-helpers";
-import styles from './index.module.scss';
-import { FaPlay, FaRegHeart, FaPause } from "react-icons/fa";
-import { updateCurrentId, $currentTrackId, $playing, setPlaying, updateQueue } from '@/app/store/queue';
-import { useUnit } from 'effector-react';
-import cn from 'classnames';
-import { usePathname } from 'next/navigation';
-import { playlists, history as mockHistory } from '@/mock/playlists';
 import { Typography, useMediaQuery } from '@mui/material';
+import cn from 'classnames';
+import { useUnit } from 'effector-react';
+import { usePathname } from 'next/navigation';
+import React, { useState } from 'react';
+import { FaPlay, FaRegHeart, FaPause } from "react-icons/fa";
+
+import { findTrack } from "@/app/helpers/track-helpers";
+import { updateCurrentId, $currentTrackId, $playing, setPlaying, updateQueue } from '@/app/store/queue';
 import { setPlayingRadio, updateCurrentRadio } from '@/app/store/radio';
+import { playlists, history as mockHistory } from '@/mock/playlists';
+
+import styles from './index.module.scss';
 
 interface TrackProps {
     trackId: string;

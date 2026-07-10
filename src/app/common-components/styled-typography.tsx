@@ -1,8 +1,8 @@
-import styled from "styled-components";
 import { Typography, TypographyProps } from "@mui/material";
-import { Theme } from "@mui/system";
 import { useTheme } from "@mui/material/styles";
+import { Theme } from "@mui/system";
 import React from "react";
+import styled from "styled-components";
 
 const MyTypography = styled(Typography)<{ theme: Theme, color: string }>`
     color: ${({ theme, color }) => theme.palette?.[color].main};

@@ -6,4 +6,4 @@ export async function GET(request: Request, { params } : { params: { id: string 
         status: 'success',
         data: playlists.find(item => item.id === params.id) // todo: надо перенести все в бд и сделать по-человечески
     })
-};
+}

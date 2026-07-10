@@ -1,10 +1,17 @@
 'use client'
-import { PlaylistType } from '@/app/types/playlists';
-import { Box, ImageListItem, ImageListItemBar, Typography } from '@mui/material';
-import React from 'react';
+/* eslint-disable import/order */
 import { useRouter } from 'next/navigation';
+import React from 'react';
+import {
+    Box,
+    ImageListItem,
+    ImageListItemBar,
+    Typography
+} from '@mui/material';
 import { FaMusic } from "react-icons/fa6";
 import styles from './index.module.scss';
+
+import type { PlaylistType } from '@/app/types/playlists';
 
 interface PlaylistCardProps {
     playlist: PlaylistType
@@ -42,3 +49,6 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist }) => {
         </ImageListItem>
     )
 }
+/* eslint-enable import/order */
+
+

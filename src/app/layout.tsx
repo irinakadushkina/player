@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+
 import "./globals.css";
+import { darkTheme } from "@/app/theme";
+
 import StyledComponentsRegistry from './registry'
+
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { darkTheme } from "@/app/theme";
 
 const inter = Inter({ subsets: ["latin"] });
 

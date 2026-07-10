@@ -1,6 +1,8 @@
 import { MdModeEditOutline } from "react-icons/md";
-import styles from './page.module.scss';
+
 import { getMe } from "@/app/services/user";
+
+import styles from './page.module.scss';
 
 const Profile = async () => {
     const { first_name, last_name, email, phone_number, avatar } = await getMe();

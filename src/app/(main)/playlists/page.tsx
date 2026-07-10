@@ -1,9 +1,12 @@
+import { Grid } from '@mui/material';
+import { Suspense } from 'react';
+
+import MainLoading from '@/app/(main)/loading';
 import { getPlaylists } from '@/app/services/playlists';
 import { PlaylistsType } from '@/app/types/playlists';
+
 import { PlaylistCard } from './components/playlist-card';
-import { Suspense } from 'react';
-import { Grid } from '@mui/material';
-import MainLoading from '@/app/(main)/loading';
+
 
 const Playlists = async () => {
     const playlists: PlaylistsType = await getPlaylists();

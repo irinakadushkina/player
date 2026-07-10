@@ -1,6 +1,7 @@
 'use client'
 import { Box, useTheme } from "@mui/material";
 import Image from 'next/image'
+
 import test from '../../../../../../public/assets/mock-cover-recomends.png';
 
 const Card = () => {

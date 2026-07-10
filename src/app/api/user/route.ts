@@ -7,4 +7,4 @@ export async function GET(
         status: 'success',
         data: USER // todo: надо перенести все в бд и сделать по-человечески
     })
-};
+}

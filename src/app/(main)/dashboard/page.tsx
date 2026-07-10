@@ -1,9 +1,12 @@
-import { history, playlists } from '@/mock/playlists';
-import { Track } from '../components/track';
-import styles from './page.module.scss';
-import { PlaylistCard } from '../playlists/components/playlist-card';
-import cn from 'classnames';
 import { Typography } from '@mui/material';
+import cn from 'classnames';
+
+import { history, playlists } from '@/mock/playlists';
+
+import { Track } from '../components/track';
+import { PlaylistCard } from '../playlists/components/playlist-card';
+
+import styles from './page.module.scss';
 
 const Dashboard = () => {
     return (

@@ -2,13 +2,12 @@
 
 import { BottomNavigation, BottomNavigationAction, Theme, useTheme } from '@mui/material';
 import Link from 'next/link';
-import styled from 'styled-components';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-
-import { RiDashboardFill, RiPlayListFill } from 'react-icons/ri';
 import { MdRadio } from 'react-icons/md';
+import { RiDashboardFill, RiPlayListFill } from 'react-icons/ri';
 import { SiApplepodcasts } from 'react-icons/si';
+import styled from 'styled-components';
 
 
 type Route = {

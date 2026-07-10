@@ -1,8 +1,10 @@
-import React from "react"
-import { getPlaylist } from "@/app/services/playlists";
-import { Track } from "../../components/track";
 import { Box, Typography } from "@mui/material";
+import React from "react"
 import { FaMusic } from "react-icons/fa6";
+
+import { getPlaylist } from "@/app/services/playlists";
+
+import { Track } from "../../components/track";
 
 interface PlaylistPageProps {
     params: Promise<{ id: string }>

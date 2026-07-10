@@ -1,10 +1,12 @@
-import RoterStern from './tracks/Roter-Stern.mp3';
-import Raketen from './tracks/Raketen.mp3';
-import Marsch from './tracks/Marsch.mp3';
-import TheRedBaron from './tracks/The-Red-Baron.mp3';
-import TheNights from './tracks/Avicii-The-Nights.mp3';
-import Un_Mondo_Magico from './tracks/Skar_Manfree_DJ_Matrix_feat_Marvin_-_Un_Mondo_Magico.mp3';
 import { TracksType } from '@/app/types/tracks';
+
+import TheNights from './tracks/Avicii-The-Nights.mp3';
+import Marsch from './tracks/Marsch.mp3';
+import Raketen from './tracks/Raketen.mp3';
+import RoterStern from './tracks/Roter-Stern.mp3';
+import Un_Mondo_Magico from './tracks/Skar_Manfree_DJ_Matrix_feat_Marvin_-_Un_Mondo_Magico.mp3';
+import TheRedBaron from './tracks/The-Red-Baron.mp3';
+
 
 export const tracks: TracksType  = [
     {
