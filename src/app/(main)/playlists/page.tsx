@@ -8,14 +8,14 @@ import MainLoading from '@/app/(main)/loading';
 const Playlists = async () => {
     const playlists: PlaylistsType = await getPlaylists();
 
-    // todo: подумать над дизайном
     return (
-        <Suspense fallback={<MainLoading/>}>
+        <Suspense fallback={<MainLoading />}>
             <Grid container spacing={2} margin={0}>
-                {playlists?.map((item) => <Grid key={item.id}>
+                {playlists?.map((item) => (
+                    <Grid key={item.id}>
                         <PlaylistCard key={item.id} playlist={item} />
                     </Grid>
-                )}
+                ))}
             </Grid>
         </Suspense>
     )
