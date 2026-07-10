@@ -3,17 +3,18 @@
 import { BottomNavigation, BottomNavigationAction, Theme, useTheme } from '@mui/material';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { SVGProps, useState } from 'react';
 import { MdRadio } from 'react-icons/md';
 import { RiDashboardFill, RiPlayListFill } from 'react-icons/ri';
 import { SiApplepodcasts } from 'react-icons/si';
 import styled from 'styled-components';
 
+type IconComponent = React.FC<SVGProps<SVGSVGElement>>;
 
 type Route = {
     id: string;
     name: string;
-    Icon: React.ComponentType<any>;
+    Icon: IconComponent;
     url: string;
 }
 
