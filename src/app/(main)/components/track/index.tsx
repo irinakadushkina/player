@@ -26,7 +26,8 @@ export const Track: React.FC<TrackProps> = ({ trackId, playlistId }) => {
     const isPlaying = useUnit($playing);
     const isCurrentTrack = currentTrackId === id;
     const pathname = usePathname();
-    const [ _, type, listId] = pathname.split('/');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_, type, listId] = pathname.split('/');
     const currentPlaylistId = playlistId || listId;
 
     const onMouseOver = () => {
@@ -41,7 +42,7 @@ export const Track: React.FC<TrackProps> = ({ trackId, playlistId }) => {
     const handleClick = () => {
         updateCurrentRadio(undefined);
         setPlayingRadio(false);
-        if (isCurrentTrack) setPlaying(!isPlaying); 
+        if (isCurrentTrack) setPlaying(!isPlaying);
         else {
             const nextList = [...playlists, mockHistory].find(item => item.id === currentPlaylistId);
             updateQueue(nextList?.tracks || []);
@@ -50,7 +51,7 @@ export const Track: React.FC<TrackProps> = ({ trackId, playlistId }) => {
     }
 
     return (
-        <div className={cn(styles.trackWrapper, {[styles.active]: isCurrentTrack})} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} onClick={handleClick}>
+        <div className={cn(styles.trackWrapper, { [styles.active]: isCurrentTrack })} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} onClick={handleClick}>
             <div className={styles.trackInfo}>
                 <img src={cover} />
                 <div className={styles.iconWrapper}>
@@ -58,7 +59,7 @@ export const Track: React.FC<TrackProps> = ({ trackId, playlistId }) => {
                         isCurrentTrack && isPlaying ? <FaPause /> : <FaPlay />
                     }
                 </div>
-                <div className={styles.titleBlock}> 
+                <div className={styles.titleBlock}>
                     <Typography sx={{ fontSize: '14px', fontWeight: 700 }}>{title}</Typography>
                     <Typography sx={{ opacity: .5, fontSize: '14px' }}>{artists.join(', ')}</Typography>
                 </div>

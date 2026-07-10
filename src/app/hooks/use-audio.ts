@@ -28,7 +28,7 @@ export const useAudio = () => {
     audio.current?.pause();
 
     if (trackIndex - 1 < 0) {
-     if (playingType === 'repeat') updateCurrentId(list[list.length - 1]);
+      if (playingType === 'repeat') updateCurrentId(list[list.length - 1]);
     } else {
       updateCurrentId(list[trackIndex - 1]);
     }
@@ -139,7 +139,8 @@ export const useAudio = () => {
   // Эффект с привязкой событий на изменение времени и окончание трека
   useEffect(() => {
     if (audio.current) {
-      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       audio.current.ontimeupdate = (e) => setCurrentTime(e.target?.currentTime || 0);
       audio.current.onended = () => {
         if (id) addTrackToHistory(id);
