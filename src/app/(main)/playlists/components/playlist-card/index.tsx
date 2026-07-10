@@ -22,7 +22,7 @@ export const PlaylistCard: React.FC<PlaylistCardProps> = ({ playlist }) => {
     const router = useRouter();
 
     const handleClick = () => {
-        router.push(`/playlists/${playlist.id}`);
+        router.push(`/playlists/${id}`);
     }
 
     return (
