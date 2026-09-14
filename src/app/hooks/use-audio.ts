@@ -22,6 +22,61 @@ export const useAudio = () => {
   const isReady = useRef(false);
   const { duration } = audio.current || {};
 
+  // Рефы для визуализатора
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const sourceRef = useRef<MediaElementAudioSourceNode | null>(null);
+  const rafRef = useRef<number | null>(null);
+
+  const [frequencyData, setFrequencyData] = useState<Uint8Array>(new Uint8Array(128));
+
+  // Инициализация AudioContext (вызывается один раз при первом клике)
+  const initVisualizer = useCallback(() => {
+    if (audioCtxRef.current || !audio.current) return;
+
+    const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioCtx) return;
+
+    const ctx = new AudioCtx();
+    audioCtxRef.current = ctx;
+
+    const analyser = ctx.createAnalyser();
+    analyser.fftSize = 256;
+    analyserRef.current = analyser;
+
+    // Привязываем существующий audio.current к графу Web Audio API
+    const source = ctx.createMediaElementSource(audio.current);
+    source.connect(analyser);
+    analyser.connect(ctx.destination);
+    sourceRef.current = source;
+  }, []);
+
+  const startVisualizer = useCallback(() => {
+    const analyser = analyserRef.current;
+    if (!analyser) return;
+
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    const tick = () => {
+      analyser.getByteFrequencyData(dataArray);
+      setFrequencyData(new Uint8Array(dataArray));
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    if (rafRef.current === null) {
+      tick();
+    }
+  }, []);
+
+  const stopVisualizer = useCallback(() => {
+    if (rafRef.current !== null) {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+    }
+    setFrequencyData(new Uint8Array(128));
+  }, []);
+
   //Предыдущий трек
   const handlePrevTrack = useCallback(() => {
     setCurrentTime(0);
@@ -32,20 +87,19 @@ export const useAudio = () => {
     } else {
       updateCurrentId(list[trackIndex - 1]);
     }
-  }, [list, currentId, trackIndex, playingType]);
+  }, [list, trackIndex, playingType]);
 
   //Следующий трек
   const handleNextTrack = useCallback(() => {
     setCurrentTime(0);
     audio.current?.pause();
 
-    console.log(trackIndex, list.length, playingType)
     if (trackIndex < list.length - 1) {
       updateCurrentId(list[trackIndex + 1]);
     } else if (playingType === 'repeat') {
       updateCurrentId(list[0]);
     }
-  }, [currentId, list, trackIndex, playingType]);
+  }, [list, trackIndex, playingType]);
 
   //Начало сдвига трека
   const handleScrub = useCallback((value: number) => {
@@ -63,6 +117,9 @@ export const useAudio = () => {
 
   //Воспроизвести/остановить трек
   const handlePlayButtonClick = () => {
+    if (audioCtxRef.current?.state === 'suspended') {
+      audioCtxRef.current.resume();
+    }
     setPlaying(!isPlaying);
   }
 
@@ -100,8 +157,13 @@ export const useAudio = () => {
       if (!audio.current) return;
       setPlaying(false);
       audio.current.pause();
+      stopVisualizer();
+      
+      if (audioCtxRef.current && audioCtxRef.current.state !== 'closed') {
+        audioCtxRef.current.close();
+      }
     };
-  }, []);
+  }, [stopVisualizer]);
 
   //Эффект на изменение текущего трека
   useEffect(() => {
@@ -109,8 +171,11 @@ export const useAudio = () => {
 
     audio.current.pause();
 
-    audio.current = new Audio(src);
-    setCurrentTime(audio.current.currentTime);
+    if (src) {
+      audio.current.src = src;
+      audio.current.load();
+    }
+    setCurrentTime(0);
     audio.current.volume = volume / 100;
 
     if (isReady.current && id) {
@@ -119,17 +184,20 @@ export const useAudio = () => {
     } else {
       isReady.current = true;
     }
-  }, [id]);
+  }, [id, src, volume]);
 
   //Эффект на проигрывание/остановку трека
   useEffect(() => {
     if (isPlaying) {
+      initVisualizer();
       audio.current?.play();
+      startVisualizer();
     }
     else {
       audio.current?.pause();
+      stopVisualizer();
     }
-  }, [isPlaying]);
+  }, [isPlaying, startVisualizer, stopVisualizer]);
 
   //Эффект на отслеживание воспроизведения ( для остановки/запуска извне (расширения, мак) )
   useEffect(() => {
@@ -152,7 +220,7 @@ export const useAudio = () => {
         }
       }
     }
-  }, [audio.current, handleNextTrack, playingType, trackIndex]);
+  }, [handleNextTrack, id, list, playingType, trackIndex]);
 
   const data = useMemo(() => ({
     handleNextTrack,
@@ -163,6 +231,7 @@ export const useAudio = () => {
     handleChangeVolume,
     handleMute,
     trackLoading,
+    frequencyData,
     track: { id, src, cover, title, artists, duration, volume, mute, progress: currentTime, isPlaying },
   }), [
     handleNextTrack,
@@ -173,6 +242,7 @@ export const useAudio = () => {
     handleChangeVolume,
     handleMute,
     trackLoading,
+    frequencyData,
     id, src, cover, title, artists, duration, volume, mute, currentTime, isPlaying
   ])
 
