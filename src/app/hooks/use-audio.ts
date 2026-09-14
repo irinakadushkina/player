@@ -34,6 +34,7 @@ export const useAudio = () => {
   const initVisualizer = useCallback(() => {
     if (audioCtxRef.current || !audio.current) return;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
     if (!AudioCtx) return;
 
